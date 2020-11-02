@@ -58,4 +58,6 @@ foo.myCall(obj)
 
 foo.myApply(obj)
 
+foo.myBind(obj)
+
 
