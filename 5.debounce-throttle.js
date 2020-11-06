@@ -3,7 +3,7 @@ const debounce = (fn, delay) => {
   let timer = null
   clearInterval(timer)
   return (...args) => {
-    setTimeout(() => {
+    timer = setTimeout(() => {
       fn.apply(this, args)
     }, delay);
   }
