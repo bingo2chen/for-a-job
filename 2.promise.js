@@ -1,3 +1,5 @@
+- '基础版：https://zhuanlan.zhihu.com/p/58428287'
+
 const PENDING = 'pending'
 const RESOLVED = 'resolved'
 const REJECTED = 'rejected'
@@ -49,3 +51,29 @@ MyPromise.prototype.then = function (onFullFilled, onRejected) {
     onRejected(_this.value)
   }
 }
+
+MyPromise.all = function (promises) {
+  return new Promise((resolve, reject) => {
+    const ret = []
+    for (let i = 0; i < promises.length; i++) {
+      const promise = promises[i];
+      promise.then(res => {
+        ret.push(res)
+        if (promises.length === ret.length) {
+          resolve(ret)
+        }
+      }).catch(reject)
+    }
+  })
+}
+
+MyPromise.race = function (promises) {
+  return new Promise((resolve, reject) => {
+    for (let i = 0; i < promises.length; i++) {
+      const promise = promises[i];
+      promise.then(resolve).catch(reject)
+    }
+  })
+}
+
+
